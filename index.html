@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>АвтоМаркет KG — купить и продать авто в Кыргызстане</title>
+  <meta name="description" content="Каталог автомобилей с ценами в долларах и сомах, фильтры и размещение объявлений.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="header">
+    <div class="container header__row">
+      <a href="#top" class="logo" aria-label="АвтоМаркет KG">
+        <span class="logo__mark">A</span>
+        <span class="logo__text">Авто<b>Маркет</b> KG</span>
+      </a>
+
+      <nav class="nav" id="nav" aria-label="Главное меню">
+        <a href="#catalog">Каталог</a>
+        <a href="#sell">Разместить объявление</a>
+        <a href="#about">О нас</a>
+      </nav>
+
+      <div class="header__tools">
+        <div class="currency" role="group" aria-label="Валюта">
+          <button type="button" class="currency__btn is-active" data-cur="USD">$</button>
+          <button type="button" class="currency__btn" data-cur="KGS">сом</button>
+        </div>
+        <button class="burger" id="burger" type="button" aria-label="Открыть меню" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <section class="hero">
+      <div class="container hero__grid">
+        <div class="hero__text">
+          <span class="hero__tag">Бишкек · Ош · Чолпон-Ата</span>
+          <h1>Найдите свою машину <span class="hl">без лишних звонков</span></h1>
+          <p>Честные описания с плюсами и минусами, цены сразу в долларах и сомах и удобные фильтры. Свою машину можно выставить за пару минут.</p>
+          <div class="hero__actions">
+            <a href="#catalog" class="btn btn--primary">Смотреть каталог</a>
+            <a href="#sell" class="btn btn--ghost">Подать объявление</a>
+          </div>
+        </div>
+        <ul class="hero__stats">
+          <li><strong id="statCount">10</strong><span>авто в каталоге</span></li>
+          <li><strong id="statBrands">9</strong><span>марок</span></li>
+          <li><strong id="statFrom">$8 900</strong><span>цена от</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section" id="catalog">
+      <div class="container">
+        <div class="section__head">
+          <h2>Каталог автомобилей</h2>
+          <p id="resultCount" class="muted" aria-live="polite"></p>
+        </div>
+
+        <button class="btn btn--filter" id="filterToggle" type="button" aria-expanded="false" aria-controls="filters">
+          Фильтры
+        </button>
+
+        <div class="layout">
+          <aside class="filters" id="filters" aria-label="Фильтры">
+            <form id="filterForm" autocomplete="off">
+              <label class="field field--wide">
+                <span>Поиск</span>
+                <input type="search" id="fQ" placeholder="Марка, модель, город…">
+              </label>
+
+              <label class="field">
+                <span>Марка</span>
+                <select id="fBrand"><option value="">Все марки</option></select>
+              </label>
+
+              <label class="field">
+                <span>Кузов</span>
+                <select id="fBody">
+                  <option value="">Любой</option>
+                  <option>Седан</option>
+                  <option>Хэтчбек</option>
+                  <option>Внедорожник</option>
+                  <option>Кроссовер</option>
+                  <option>Универсал</option>
+                  <option>Минивэн</option>
+                </select>
+              </label>
+
+              <label class="field">
+                <span>Топливо</span>
+                <select id="fFuel">
+                  <option value="">Любое</option>
+                  <option>Бензин</option>
+                  <option>Дизель</option>
+                  <option>Гибрид</option>
+                  <option>Газ/бензин</option>
+                  <option>Электро</option>
+                </select>
+              </label>
+
+              <label class="field">
+                <span>Коробка</span>
+                <select id="fTrans">
+                  <option value="">Любая</option>
+                  <option>Автомат</option>
+                  <option>Механика</option>
+                  <option>Вариатор</option>
+                </select>
+              </label>
+
+              <fieldset class="field field--wide range">
+                <legend>Цена, $</legend>
+                <input type="number" id="fPMin" min="0" step="500" placeholder="от" inputmode="numeric">
+                <i>—</i>
+                <input type="number" id="fPMax" min="0" step="500" placeholder="до" inputmode="numeric">
+              </fieldset>
+
+              <fieldset class="field field--wide range">
+                <legend>Год выпуска</legend>
+                <input type="number" id="fYMin" min="1990" max="2030" placeholder="от" inputmode="numeric">
+                <i>—</i>
+                <input type="number" id="fYMax" min="1990" max="2030" placeholder="до" inputmode="numeric">
+              </fieldset>
+
+              <label class="field field--wide">
+                <span>Пробег до, км</span>
+                <input type="number" id="fKm" min="0" step="5000" placeholder="например, 120000" inputmode="numeric">
+              </label>
+
+              <label class="field field--wide">
+                <span>Сортировка</span>
+                <select id="fSort">
+                  <option value="new">Сначала новые объявления</option>
+                  <option value="priceAsc">Сначала дешёвые</option>
+                  <option value="priceDesc">Сначала дорогие</option>
+                  <option value="yearDesc">Сначала новее год</option>
+                  <option value="kmAsc">Сначала малый пробег</option>
+                </select>
+              </label>
+
+              <button type="reset" class="btn btn--outline btn--block" id="fReset">Сбросить фильтры</button>
+            </form>
+          </aside>
+
+          <div class="results">
+            <div class="grid" id="carGrid"></div>
+            <div class="empty" id="emptyState" hidden>
+              <div class="empty__icon" aria-hidden="true">🚗</div>
+              <h3>Ничего не найдено</h3>
+              <p>Попробуйте изменить параметры или сбросить фильтры.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--tint" id="sell">
+      <div class="container">
+        <div class="section__head">
+          <h2>Разместить своё объявление</h2>
+          <p class="muted">Заполните форму: объявление сразу появится в каталоге и сохранится в вашем браузере.</p>
+        </div>
+
+        <form class="sell" id="sellForm" novalidate>
+          <div class="sell__grid">
+            <label class="field">
+              <span>Марка *</span>
+              <input type="text" name="brand" required maxlength="30" placeholder="Toyota">
+            </label>
+            <label class="field">
+              <span>Модель *</span>
+              <input type="text" name="model" required maxlength="40" placeholder="Camry">
+            </label>
+            <label class="field">
+              <span>Год *</span>
+              <input type="number" name="year" required min="1970" max="2030" placeholder="2018" inputmode="numeric">
+            </label>
+            <label class="field">
+              <span>Цена, $ *</span>
+              <input type="number" name="price" required min="100" step="50" placeholder="15000" inputmode="numeric">
+              <small class="hint" id="priceHint"></small>
+            </label>
+            <label class="field">
+              <span>Пробег, км *</span>
+              <input type="number" name="mileage" required min="0" step="100" placeholder="95000" inputmode="numeric">
+            </label>
+            <label class="field">
+              <span>Двигатель</span>
+              <input type="text" name="engine" maxlength="30" placeholder="2.5 л, 181 л.с.">
+            </label>
+            <label class="field">
+              <span>Кузов</span>
+              <select name="body">
+                <option>Седан</option>
+                <option>Хэтчбек</option>
+                <option>Внедорожник</option>
+                <option>Кроссовер</option>
+                <option>Универсал</option>
+                <option>Минивэн</option>
+              </select>
+            </label>
+            <label class="field">
+              <span>Топливо</span>
+              <select name="fuel">
+                <option>Бензин</option>
+                <option>Дизель</option>
+                <option>Гибрид</option>
+                <option>Газ/бензин</option>
+                <option>Электро</option>
+              </select>
+            </label>
+            <label class="field">
+              <span>Коробка</span>
+              <select name="trans">
+                <option>Автомат</option>
+                <option>Механика</option>
+                <option>Вариатор</option>
+              </select>
+            </label>
+            <label class="field">
+              <span>Город *</span>
+              <input type="text" name="city" required maxlength="30" placeholder="Бишкек">
+            </label>
+            <label class="field">
+              <span>Телефон *</span>
+              <input type="tel" name="phone" required maxlength="20" placeholder="+996 555 123 456" inputmode="tel">
+            </label>
+            <label class="field">
+              <span>Ваше имя</span>
+              <input type="text" name="seller" maxlength="30" placeholder="Азамат">
+            </label>
+
+            <label class="field field--full">
+              <span>Описание</span>
+              <textarea name="description" rows="4" maxlength="800" placeholder="Состояние, комплектация, обслуживание, причина продажи…"></textarea>
+            </label>
+            <label class="field field--full">
+              <span>Минусы (каждый с новой строки)</span>
+              <textarea name="cons" rows="3" maxlength="500" placeholder="Честно напишите о недостатках — покупатели это ценят"></textarea>
+            </label>
+
+            <div class="field field--full">
+              <span>Фото (до 5 штук)</span>
+              <label class="upload">
+                <input type="file" id="photoInput" accept="image/*" multiple>
+                <span class="upload__label">📷 Выбрать фото</span>
+              </label>
+              <div class="previews" id="previews"></div>
+            </div>
+          </div>
+
+          <p class="form__error" id="formError" role="alert" hidden></p>
+          <button type="submit" class="btn btn--primary btn--lg">Опубликовать объявление</button>
+        </form>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="container about">
+        <div class="about__card">
+          <h3>Честные описания</h3>
+          <p>У каждой машины указаны не только плюсы, но и слабые места, чтобы вы заранее знали, на что смотреть при осмотре.</p>
+        </div>
+        <div class="about__card">
+          <h3>Цена в $ и в сомах</h3>
+          <p>Стоимость показывается сразу в двух валютах. Курс задаётся в одном месте в <code>script.js</code>.</p>
+        </div>
+        <div class="about__card">
+          <h3>Быстрое размещение</h3>
+          <p>Загрузите до 5 фото, укажите цену и телефон — и объявление уже в каталоге.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__row">
+      <span>© <span id="year"></span> АвтоМаркет KG</span>
+      <span class="muted-light" id="rateNote"></span>
+    </div>
+  </footer>
+
+  <dialog id="carModal" aria-label="Подробности об автомобиле">
+    <div class="modal__inner" id="modalInner"></div>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
